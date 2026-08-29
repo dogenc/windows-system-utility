@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Splash braucht kein Skript und keine externen Ressourcen. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self';"
+    />
+    <title>SystemUtilitybyDGKN@Labs</title>
+    <link rel="stylesheet" href="splash.css" />
+  </head>
+
+  <body>
+    <div class="splash">
+      <svg class="splash__mark" viewBox="0 0 256 256" width="64" height="64" aria-hidden="true">
+        <defs>
+          <linearGradient id="face" x1="0.04" y1="0.02" x2="0.96" y2="1">
+            <stop offset="0" stop-color="#5df0d8" />
+            <stop offset="0.32" stop-color="#22cff2" />
+            <stop offset="0.66" stop-color="#3d7bf7" />
+            <stop offset="1" stop-color="#7c4ff0" />
+          </linearGradient>
+          <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.30" />
+            <stop offset="0.36" stop-color="#ffffff" stop-opacity="0.05" />
+            <stop offset="0.55" stop-color="#ffffff" stop-opacity="0" />
+          </linearGradient>
+          <radialGradient id="vignette" cx="0.80" cy="0.92" r="0.72">
+            <stop offset="0.40" stop-color="#0a0f22" stop-opacity="0" />
+            <stop offset="1" stop-color="#0a0f22" stop-opacity="0.28" />
+          </radialGradient>
+          <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.75" />
+            <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.12" />
+            <stop offset="1" stop-color="#052420" stop-opacity="0.42" />
+          </linearGradient>
+          <clipPath id="tile">
+            <rect x="10" y="10" width="236" height="236" rx="56" />
+          </clipPath>
+          <filter id="carve" x="-25%" y="-25%" width="150%" height="150%">
+            <feDropShadow dx="0" dy="2.6" stdDeviation="0.7" flood-color="#f2fffb" flood-opacity="0.45" />
+          </filter>
+        </defs>
+        <g clip-path="url(#tile)">
+          <rect x="10" y="10" width="236" height="236" fill="url(#face)" />
+          <rect x="10" y="10" width="236" height="236" fill="url(#vignette)" />
+          <rect x="10" y="10" width="236" height="236" fill="url(#sheen)" />
+        </g>
+        <rect x="11.25" y="11.25" width="233.5" height="233.5" rx="55"
+              fill="none" stroke="url(#rim)" stroke-width="2.5" />
+        <g filter="url(#carve)">
+          <text x="128" y="150" text-anchor="middle"
+                font-family="Segoe UI, system-ui, sans-serif"
+                font-size="104" font-weight="800" letter-spacing="-5"
+                fill="#052a24">DG</text>
+        </g>
+        <rect x="82" y="177" width="92" height="12" rx="6" fill="#052a24" opacity="0.38" />
+        <rect x="82" y="177" width="41" height="12" rx="6" fill="#f2fffb" opacity="0.95" />
+      </svg>
+
+      <h1 class="splash__title">SystemUtility<span>byDGKN@Labs</span></h1>
+      <p class="splash__sub">Temp-Cleaner &amp; Path-Locator</p>
+
+      <div class="splash__bar"><span></span></div>
+      <p class="splash__hint">Systempfade werden gelesen …</p>
+    </div>
+  </body>
+</html>

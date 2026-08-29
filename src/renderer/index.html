@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      Strikte CSP: keine Inline-Skripte, keine externen Ressourcen.
+      Zusammen mit contextIsolation + sandbox ist der Renderer damit
+      vollstaendig von Node.js abgeschottet.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SystemUtilitybyDGKN@Labs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand__mark" aria-hidden="true">DG</div>
+        <div class="brand__text">
+          <h1>SystemUtility<span class="brand__accent">byDGKN@Labs</span></h1>
+          <p id="system-line" class="brand__sub">System wird gelesen …</p>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <span id="elevation-badge" class="badge badge--muted">Rechte: unbekannt</span>
+        <button id="btn-refresh" class="btn btn--ghost" type="button">Neu einlesen</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- ============================ Cache & Temp-Cleaner ============================ -->
+      <section class="panel" aria-labelledby="cleaner-title">
+        <div class="panel__head">
+          <div class="panel__titlegroup">
+            <h2 id="cleaner-title">Cache &amp; Temp-Cleaner</h2>
+            <span class="info-wrap">
+              <button
+                class="info-btn"
+                type="button"
+                aria-label="Info zum Temp-Cleaner"
+                aria-expanded="false"
+                data-info="Temporaere Dateien von Anwendungen. Das Loeschen ist unbedenklich, aktive Dateien werden automatisch uebersprungen. Gescannt wird nur innerhalb fest einprogrammierter Ordner – die App kann per Konstruktion nichts ausserhalb dieser Liste anfassen."
+              >
+                i
+              </button>
+            </span>
+          </div>
+
+          <div class="panel__actions">
+            <label class="field" for="age-filter">
+              Nur aelter als
+              <select id="age-filter">
+                <option value="0" selected>alle Dateien</option>
+                <option value="1">1 Stunde</option>
+                <option value="24">24 Stunden</option>
+                <option value="168">7 Tage</option>
+                <option value="720">30 Tage</option>
+              </select>
+            </label>
+            <button id="btn-scan" class="btn btn--ghost" type="button">Groesse berechnen</button>
+            <button id="btn-clean" class="btn btn--danger" type="button" disabled>Bereinigen</button>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="summary__value" id="total-size">–</div>
+          <div class="summary__meta">
+            <span id="total-meta">Noch nicht gescannt</span>
+            <div class="progress" id="progress" hidden>
+              <div class="progress__bar"></div>
+            </div>
+            <span class="progress__label" id="progress-label"></span>
+          </div>
+        </div>
+
+        <ul class="target-list" id="target-list">
+          <li class="placeholder">Ziele werden geladen …</li>
+        </ul>
+
+        <details class="log" id="log-box" hidden>
+          <summary>Uebersprungene Dateien <span class="log__count" id="log-count">0</span></summary>
+          <pre class="log__body" id="log-body"></pre>
+        </details>
+      </section>
+
+      <!-- ============================ Path-Locator ============================ -->
+      <section class="panel" aria-labelledby="locator-title">
+        <div class="panel__head">
+          <div class="panel__titlegroup">
+            <h2 id="locator-title">Path-Locator</h2>
+            <span class="info-wrap">
+              <button
+                class="info-btn"
+                type="button"
+                aria-label="Info zum Path-Locator"
+                aria-expanded="false"
+                data-info="Direktsprung zu System- und Entwicklerpfaden. 'Oeffnen' zeigt den Ordner im Explorer, 'Zeigen' markiert den Eintrag darin. Dateien werden nie direkt gestartet – es oeffnet sich immer nur der umgebende Ordner."
+              >
+                i
+              </button>
+            </span>
+          </div>
+          <div class="panel__actions">
+            <input
+              id="path-filter"
+              class="input"
+              type="search"
+              placeholder="Pfade filtern …"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+
+        <div class="path-grid" id="path-grid">
+          <p class="placeholder">Pfade werden geladen …</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <span id="status">Bereit.</span>
+      <span id="versions" class="statusbar__right"></span>
+    </footer>
+
+    <!-- Wird per JS positioniert und gefuellt -->
+    <div id="info-box" class="info-box" role="tooltip" hidden></div>
+
+    <script type="module" src="renderer.js"></script>
+  </body>
+</html>

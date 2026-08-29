@@ -1,0 +1,75 @@
+{
+  "name": "system-utility-by-dgkn-labs",
+  "productName": "SystemUtilitybyDGKN@Labs",
+  "version": "1.0.0",
+  "description": "Windows System Utility – Temp-Cleaner und Path-Locator fuer Entwickler",
+  "author": "DGKN@Labs",
+  "license": "MIT",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "icon": "electron scripts/make-icon.cjs",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:renderer": "tsc -p tsconfig.renderer.json",
+    "copy:assets": "node scripts/copy-assets.mjs",
+    "build": "npm run build:main && npm run build:renderer && npm run copy:assets",
+    "start": "npm run build && electron .",
+    "dev": "npm run build && electron . --dev",
+    "typecheck": "tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
+    "dist": "npm run build && electron-builder --win",
+    "dist:dir": "npm run build && electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "electron": "^43.4.1",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.6.3"
+  },
+  "build": {
+    "appId": "com.dgkn.labs.systemutility",
+    "productName": "SystemUtilitybyDGKN@Labs",
+    "copyright": "Copyright © DGKN@Labs",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "dist/**/*",
+      "!dist/**/*.map",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": ["icon.ico", "icon.png", "*.svg"]
+      }
+    ],
+    "asar": true,
+    "compression": "maximum",
+    "win": {
+      "icon": "assets/icon.ico",
+      "executableName": "SystemUtilitybyDGKN",
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SystemUtility by DGKN",
+      "uninstallDisplayName": "SystemUtilitybyDGKN@Labs",
+      "artifactName": "SystemUtilitybyDGKN-Labs-Setup-${version}.${ext}",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
+    },
+    "portable": {
+      "artifactName": "SystemUtilitybyDGKN-Labs-Portable-${version}.${ext}"
+    }
+  }
+}
