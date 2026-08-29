@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Last local gate before any remote receives a commit.
+exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/Test-NoSecrets.ps1 -Staged
